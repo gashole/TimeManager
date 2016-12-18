@@ -55,6 +55,15 @@ function UIDropDownMenu_SetWidth(width, frame, padding)
 	frame.noResize = 1
 end
 
+local origToggleGameMenu = ToggleGameMenu
+function ToggleGameMenu(clicked)
+	if TimeManagerFrame:IsShown() and not IsOptionFrameOpen() then
+		TimeManagerCloseButton:Click()
+	else
+		origToggleGameMenu(clicked)
+	end
+end
+
 local origWorldFrame_OnUpdate = WorldFrame_OnUpdate
 function WorldFrame_OnUpdate(elapsed)
 	if not elapsed then elapsed = arg1 end
