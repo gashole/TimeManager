@@ -1,13 +1,24 @@
+
+
+GAMETIME_TOOLTIP_TOGGLE_CLOCK = "Click to show clock settings."
 NEWBIE_TOOLTIP_STOPWATCH_PLAYPAUSEBUTTON = "Play/Pause"
 NEWBIE_TOOLTIP_STOPWATCH_RESETBUTTON = "Reset"
-SLASH_STOPWATCH1 = "/stopwatch" -- Toggles the stopwatch part of the time manager interface
-SLASH_STOPWATCH2 = "/timer" -- Toggles the stopwatch part of the time manager interface
-SLASH_STOPWATCH3 = "/sw" -- Toggles the stopwatch part of the time manager interface
+SLASH_STOPWATCH1 = "/stopwatch"
+SLASH_STOPWATCH2 = "/timer"
+SLASH_STOPWATCH3 = "/sw"
+SLASH_STOPWATCH4 = "/stopwatch"
+SLASH_STOPWATCH5 = "/timer"
+SLASH_STOPWATCH6 = "/sw"
 SLASH_STOPWATCH_PARAM_PAUSE1 = "pause"
+SLASH_STOPWATCH_PARAM_PAUSE2 = "pause"
 SLASH_STOPWATCH_PARAM_PLAY1 = "play"
+SLASH_STOPWATCH_PARAM_PLAY2 = "play"
 SLASH_STOPWATCH_PARAM_STOP1 = "stop"
 SLASH_STOPWATCH_PARAM_STOP2 = "clear"
 SLASH_STOPWATCH_PARAM_STOP3 = "reset"
+SLASH_STOPWATCH_PARAM_STOP4 = "stop"
+SLASH_STOPWATCH_PARAM_STOP5 = "clear"
+SLASH_STOPWATCH_PARAM_STOP6 = "reset"
 STOPWATCH_TIME_UNIT = "%02d"
 STOPWATCH_TITLE = "Stopwatch"
 TIMEMANAGER_12HOUR = "%d"
@@ -29,4 +40,3 @@ TIMEMANAGER_TITLE = "Clock"
 TIMEMANAGER_TOOLTIP_LOCALTIME = "Local time:"
 TIMEMANAGER_TOOLTIP_REALMTIME = "Realm time:"
 TIMEMANAGER_TOOLTIP_TITLE = "Time Info"
-TIMEMANAGER_TOOLTIP_TOGGLE_CLOCK_SETTINGS = "Click to show clock settings."

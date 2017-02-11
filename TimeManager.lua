@@ -194,7 +194,7 @@ function GameTimeFrame_Update()
 			GameTime_UpdateTooltip()
 			GameTooltip:AddLine(" ")
 		end
-		GameTooltip:AddLine(TIMEMANAGER_TOOLTIP_TOGGLE_CLOCK_SETTINGS)
+		GameTooltip:AddLine(GAMETIME_TOGGLE_CLOCK_SETTINGS)
 		GameTooltip:Show()
 	end
 end
@@ -723,7 +723,7 @@ function TimeManagerClockButton_UpdateTooltip()
 		GameTime_UpdateTooltip()
 		if not GameTimeFrame:IsShown() then
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddLine(TIMEMANAGER_TOOLTIP_TOGGLE_CLOCK_SETTINGS)
+			GameTooltip:AddLine(GAMETIME_TOOLTIP_TOGGLE_CLOCK)
 		end
 	end
 

@@ -2,5 +2,5 @@
 ## Title: TimeManager
 ## Notes: Time Management features from patch 2.4.3+. These features include an alarm clock, stopwatch, and viewing your computer's local time.
 ## SavedVariablesPerCharacter: TimeManagerOptions, StopwatchOptions
-Localization.lua
+Locales\Locales.xml
 TimeManager.xml
