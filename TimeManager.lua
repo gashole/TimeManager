@@ -807,6 +807,7 @@ end
 
 function StopwatchFrame_OnLoad()
 	this:RegisterEvent("ADDON_LOADED")
+	this:RegisterEvent("PLAYER_ENTERING_WORLD")
 	this:RegisterEvent("PLAYER_LOGOUT")
 	this:RegisterForDrag("LeftButton")
 	StopwatchTabFrame:SetAlpha(0)
@@ -827,6 +828,77 @@ function StopwatchFrame_OnEvent(event)
 				StopwatchFrame:SetUserPlaced(true)
 			else
 				StopwatchFrame:SetPoint("TOPRIGHT", "UIParent", "TOPRIGHT", -250, -300)
+			end
+		end
+		if name == "modui" then
+			SetCVar("modStopWatch", 0)
+
+			GameTimeFrame:Hide()
+
+			local a = TimeManagerClockButton:GetRegions()
+			table.insert(MODUI_COLOURELEMENTS_FOR_UI, a)
+
+			local _, a, b, c, d = TimeManagerFrame:GetRegions()
+			for _, v in pairs({a, b, c, d}) do
+				table.insert(MODUI_COLOURELEMENTS_FOR_UI, v)
+			end
+
+			local a, b = StopwatchFrame:GetRegions()
+			for _, v in pairs({a, b}) do
+				table.insert(MODUI_COLOURELEMENTS_FOR_UI, v)
+			end
+
+			local a, b, c = StopwatchTabFrame:GetRegions()
+			for _, v in pairs({a, b, c}) do
+				table.insert(MODUI_COLOURELEMENTS_FOR_UI, v)
+			end
+		end
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		SlashCmdList["STOPWATCH"] = function(msg)
+			local _, _, text = strfind(msg, "%s*([^%s]+)%s*")
+			if text then
+				text = strlower(text)
+
+				-- in any of the following cases, the stopwatch will be shown
+				StopwatchFrame:Show()
+
+				-- try to match a command
+				local function MatchCommand(param, text)
+					local i, compare
+					i = 1
+					repeat
+						compare = _G[param .. i]
+						if compare and compare == text then
+							return true
+						end
+						i = i + 1
+					until not compare
+					return false
+				end
+				if MatchCommand("SLASH_STOPWATCH_PARAM_PLAY", text) then
+					Stopwatch_Play()
+					return
+				end
+				if MatchCommand("SLASH_STOPWATCH_PARAM_PAUSE", text) then
+					Stopwatch_Pause()
+					return
+				end
+				if MatchCommand("SLASH_STOPWATCH_PARAM_STOP", text) then
+					Stopwatch_Clear()
+					return
+				end
+				-- try to match a countdown
+				-- kinda ghetto, but hey, it's simple and it works =)
+				local _, _, hour, minute, second = strfind(msg, "(%d+):(%d+):(%d+)")
+				if not hour then
+					_, _, minute, second = strfind(msg, "(%d+):(%d+)")
+					if not minute then
+						_, _, second = strfind(msg, "(%d+)")
+					end
+				end
+				Stopwatch_StartCountdown(tonumber(hour), tonumber(minute), tonumber(second))
+			else
+				Stopwatch_Toggle()
 			end
 		end
 	elseif event == "PLAYER_LOGOUT" then
@@ -948,53 +1020,5 @@ function StopwatchPlayPauseButton_OnClick()
 	else
 		Stopwatch_Play()
 		PlaySound("igMainMenuOptionCheckBoxOn")
-	end
-end
-
-SlashCmdList["STOPWATCH"] = function(msg)
-	local _, _, text = strfind(msg, "%s*([^%s]+)%s*")
-	if text then
-		text = strlower(text)
-
-		-- in any of the following cases, the stopwatch will be shown
-		StopwatchFrame:Show()
-
-		-- try to match a command
-		local function MatchCommand(param, text)
-			local i, compare
-			i = 1
-			repeat
-				compare = _G[param .. i]
-				if compare and compare == text then
-					return true
-				end
-				i = i + 1
-			until not compare
-			return false
-		end
-		if MatchCommand("SLASH_STOPWATCH_PARAM_PLAY", text) then
-			Stopwatch_Play()
-			return
-		end
-		if MatchCommand("SLASH_STOPWATCH_PARAM_PAUSE", text) then
-			Stopwatch_Pause()
-			return
-		end
-		if MatchCommand("SLASH_STOPWATCH_PARAM_STOP", text) then
-			Stopwatch_Clear()
-			return
-		end
-		-- try to match a countdown
-		-- kinda ghetto, but hey, it's simple and it works =)
-		local _, _, hour, minute, second = strfind(msg, "(%d+):(%d+):(%d+)")
-		if not hour then
-			_, _, minute, second = strfind(msg, "(%d+):(%d+)")
-			if not minute then
-				_, _, second = strfind(msg, "(%d+)")
-			end
-		end
-		Stopwatch_StartCountdown(tonumber(hour), tonumber(minute), tonumber(second))
-	else
-		Stopwatch_Toggle()
 	end
 end
