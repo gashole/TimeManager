@@ -830,7 +830,7 @@ function StopwatchFrame_OnEvent(event)
 				StopwatchFrame:SetPoint("TOPRIGHT", "UIParent", "TOPRIGHT", -250, -300)
 			end
 		end
-		if name == "modui" then
+		if IsAddOnLoaded("modui") then
 			SetCVar("modStopWatch", 0)
 
 			GameTimeFrame:Hide()
