@@ -99,16 +99,13 @@ local function _TimeManager_ComputeMinutes(hour, minute, militaryTime, am)
 end
 
 local function _TimeManager_GetCurrentMinutes(localTime)
-	local currTime
-	if localTime then
-		local dateInfo = date("*t")
-		local hour, minute = dateInfo.hour, dateInfo.min
-		currTime = minute + hour * 60
-	else
-		local hour, minute = GetGameTime()
-		currTime = minute + hour * 60
-	end
-	return currTime
+    local hour, minute
+    if localTime then
+        hour, minute = tonumber(date("%H")), tonumber(date("%M"))
+    else
+        hour, minute = GetGameTime()
+    end
+    return minute + hour * 60
 end
 
 function GameTime_GetFormattedTime(hour, minute, wantAMPM)
@@ -138,8 +135,7 @@ function GameTime_GetFormattedTime(hour, minute, wantAMPM)
 end
 
 function GameTime_GetLocalTime(wantAMPM)
-	local dateInfo = date("*t")
-	local hour, minute = dateInfo.hour, dateInfo.min
+	local hour, minute = tonumber(date("%H")), tonumber(date("%M"))
 	return GameTime_GetFormattedTime(hour, minute, wantAMPM), hour, minute
 end
 
